@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Amritanka's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1><a href="index.html" style="text-decoration: none; color: inherit;">Amritanka</a></h1>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="projects.html" class="nav-link">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="blog.html" class="nav-link active">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+                <div class="nav-controls">
+                    <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="lang-toggle" aria-label="Change language">
+                        <i class="fas fa-globe"></i> EN
+                    </button>
+                    <div class="hamburger">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Blog</h1>
+                <p>Thoughts, tutorials, and insights on web development and technology</p>
+            </div>
+        </section>
+
+        <section class="blog-content">
+            <div class="container">
+                <div class="blog-layout">
+                    <div class="blog-main">
+                        <div class="blog-posts">
+                            <!-- Jekyll will generate posts here -->
+                            {% for post in site.posts %}
+                            <article class="blog-post">
+                                <div class="post-meta">
+                                    <div class="post-date">{{ post.date | date: "%B %d, %Y" }}</div>
+                                    <div class="post-categories">
+                                        {% for category in post.categories %}
+                                        <span class="category-tag">{{ category }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <h2 class="post-title">
+                                    <a href="{{ post.url }}">{{ post.title }}</a>
+                                </h2>
+                                <div class="post-excerpt">
+                                    <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+                                </div>
+                                <div class="post-footer">
+                                    <div class="post-author">
+                                        <img src="https://via.placeholder.com/40x40/667eea/ffffff?text=A" alt="Author" class="author-avatar">
+                                        <span class="author-name">Amritanka</span>
+                                    </div>
+                                    <a href="{{ post.url }}" class="read-more">Read More →</a>
+                                </div>
+                            </article>
+                            {% endfor %}
+                            
+                            <!-- Sample posts for static version -->
+                            <article class="blog-post">
+                                <div class="post-meta">
+                                    <div class="post-date">November 15, 2024</div>
+                                    <div class="post-categories">
+                                        <span class="category-tag">JavaScript</span>
+                                        <span class="category-tag">React</span>
+                                    </div>
+                                </div>
+                                <h2 class="post-title">
+                                    <a href="#">Building Scalable React Applications: Best Practices</a>
+                                </h2>
+                                <div class="post-excerpt">
+                                    <p>Learn how to structure your React applications for scalability and maintainability. In this comprehensive guide, we'll explore advanced patterns, state management strategies, and performance optimization techniques...</p>
+                                </div>
+                                <div class="post-footer">
+                                    <div class="post-author">
+                                        <img src="https://via.placeholder.com/40x40/667eea/ffffff?text=A" alt="Author" class="author-avatar">
+                                        <span class="author-name">Amritanka</span>
+                                    </div>
+                                    <a href="#" class="read-more">Read More →</a>
+                                </div>
+                            </article>
+
+                            <article class="blog-post">
+                                <div class="post-meta">
+                                    <div class="post-date">November 10, 2024</div>
+                                    <div class="post-categories">
+                                        <span class="category-tag">CSS</span>
+                                        <span class="category-tag">Design</span>
+                                    </div>
+                                </div>
+                                <h2 class="post-title">
+                                    <a href="#">Modern CSS Techniques for Responsive Design</a>
+                                </h2>
+                                <div class="post-excerpt">
+                                    <p>Explore the latest CSS features and techniques for creating beautiful, responsive layouts. From CSS Grid and Flexbox to Container Queries and modern units...</p>
+                                </div>
+                                <div class="post-footer">
+                                    <div class="post-author">
+                                        <img src="https://via.placeholder.com/40x40/667eea/ffffff?text=A" alt="Author" class="author-avatar">
+                                        <span class="author-name">Amritanka</span>
+                                    </div>
+                                    <a href="#" class="read-more">Read More →</a>
+                                </div>
+                            </article>
+
+                            <article class="blog-post">
+                                <div class="post-meta">
+                                    <div class="post-date">November 5, 2024</div>
+                                    <div class="post-categories">
+                                        <span class="category-tag">Node.js</span>
+                                        <span class="category-tag">Backend</span>
+                                    </div>
+                                </div>
+                                <h2 class="post-title">
+                                    <a href="#">RESTful API Design: Principles and Best Practices</a>
+                                </h2>
+                                <div class="post-excerpt">
+                                    <p>A deep dive into designing robust and scalable RESTful APIs. We'll cover everything from resource naming conventions to error handling and versioning strategies...</p>
+                                </div>
+                                <div class="post-footer">
+                                    <div class="post-author">
+                                        <img src="https://via.placeholder.com/40x40/667eea/ffffff?text=A" alt="Author" class="author-avatar">
+                                        <span class="author-name">Amritanka</span>
+                                    </div>
+                                    <a href="#" class="read-more">Read More →</a>
+                                </div>
+                            </article>
+
+                            <article class="blog-post">
+                                <div class="post-meta">
+                                    <div class="post-date">October 28, 2024</div>
+                                    <div class="post-categories">
+                                        <span class="category-tag">Performance</span>
+                                        <span class="category-tag">Web Vitals</span>
+                                    </div>
+                                </div>
+                                <h2 class="post-title">
+                                    <a href="#">Optimizing Web Performance: A Complete Guide</a>
+                                </h2>
+                                <div class="post-excerpt">
+                                    <p>Master the art of web performance optimization. Learn about Core Web Vitals, lazy loading, code splitting, and other techniques to make your websites lightning fast...</p>
+                                </div>
+                                <div class="post-footer">
+                                    <div class="post-author">
+                                        <img src="https://via.placeholder.com/40x40/667eea/ffffff?text=A" alt="Author" class="author-avatar">
+                                        <span class="author-name">Amritanka</span>
+                                    </div>
+                                    <a href="#" class="read-more">Read More →</a>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="pagination">
+                            <button class="pagination-btn prev" disabled>
+                                <i class="fas fa-chevron-left"></i> Previous
+                            </button>
+                            <div class="pagination-numbers">
+                                <span class="page-number active">1</span>
+                                <span class="page-number">2</span>
+                                <span class="page-number">3</span>
+                                <span class="page-number">...</span>
+                                <span class="page-number">10</span>
+                            </div>
+                            <button class="pagination-btn next">
+                                Next <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <aside class="blog-sidebar">
+                        <div class="sidebar-widget">
+                            <h3>Search</h3>
+                            <div class="search-box">
+                                <input type="text" placeholder="Search posts...">
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h3>Categories</h3>
+                            <ul class="category-list">
+                                <li><a href="#">JavaScript <span class="count">8</span></a></li>
+                                <li><a href="#">React <span class="count">6</span></a></li>
+                                <li><a href="#">CSS <span class="count">5</span></a></li>
+                                <li><a href="#">Node.js <span class="count">4</span></a></li>
+                                <li><a href="#">Design <span class="count">3</span></a></li>
+                                <li><a href="#">Performance <span class="count">2</span></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h3>Popular Posts</h3>
+                            <ul class="popular-posts">
+                                <li>
+                                    <a href="#">Building Scalable React Applications</a>
+                                    <span class="post-date">Nov 15, 2024</span>
+                                </li>
+                                <li>
+                                    <a href="#">Modern CSS Techniques</a>
+                                    <span class="post-date">Nov 10, 2024</span>
+                                </li>
+                                <li>
+                                    <a href="#">RESTful API Design</a>
+                                    <span class="post-date">Nov 5, 2024</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h3>Tags</h3>
+                            <div class="tag-cloud">
+                                <a href="#" class="tag">JavaScript</a>
+                                <a href="#" class="tag">React</a>
+                                <a href="#" class="tag">CSS</a>
+                                <a href="#" class="tag">Node.js</a>
+                                <a href="#" class="tag">HTML</a>
+                                <a href="#" class="tag">Vue.js</a>
+                                <a href="#" class="tag">MongoDB</a>
+                                <a href="#" class="tag">Performance</a>
+                                <a href="#" class="tag">Design</a>
+                                <a href="#" class="tag">API</a>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h3>Newsletter</h3>
+                            <p>Subscribe to get the latest posts delivered to your inbox.</p>
+                            <form class="newsletter-form">
+                                <input type="email" placeholder="Your email address" required>
+                                <button type="submit">Subscribe</button>
+                            </form>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Amritanka. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/amritanka" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
