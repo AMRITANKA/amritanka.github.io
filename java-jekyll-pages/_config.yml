@@ -1,7 +1,0 @@
-title: Java Deep Dive
-description: Interview-focused Java backend blog
-theme: minima
-markdown: kramdown
-permalink: /:categories/:title/
-plugins:
-  - jekyll-feed
