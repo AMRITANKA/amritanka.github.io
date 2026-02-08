@@ -42,7 +42,7 @@ Welcome to my **Java-focused technical blog**, where I share clear, practical, a
 - Spring Boot Internals
 - REST API Best Practices
 - Exception Handling
-- Resilience (Circuit Breaker, Retry)
+- Resilience (Circuit Breaker, Retry )
 
 ### 🔹 Performance & JVM
 - Heap vs Stack vs Metaspace
