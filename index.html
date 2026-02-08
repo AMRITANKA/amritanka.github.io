@@ -16,22 +16,33 @@
                 </div>
                 <ul class="nav-menu">
                     <li class="nav-item">
-                        <a href="#home" class="nav-link">Home</a>
+                        <a href="index.html" class="nav-link active">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#about" class="nav-link">About</a>
+                        <a href="about.html" class="nav-link">About</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#projects" class="nav-link">Projects</a>
+                        <a href="projects.html" class="nav-link">Projects</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contact" class="nav-link">Contact</a>
+                        <a href="blog.html" class="nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">Contact</a>
                     </li>
                 </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
+                <div class="nav-controls">
+                    <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="lang-toggle" aria-label="Change language">
+                        <i class="fas fa-globe"></i> EN
+                    </button>
+                    <div class="hamburger">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -43,8 +54,8 @@
                 <h2>Welcome to My Portfolio</h2>
                 <p>I'm a passionate developer creating amazing web experiences</p>
                 <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View Projects</a>
-                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                    <a href="projects.html" class="btn btn-primary">View Projects</a>
+                    <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
                 </div>
             </div>
         </section>
@@ -65,6 +76,9 @@
                                 <span class="skill-tag">Node.js</span>
                                 <span class="skill-tag">Git</span>
                             </div>
+                        </div>
+                        <div class="about-cta">
+                            <a href="about.html" class="btn btn-primary">Learn More About Me</a>
                         </div>
                     </div>
                 </div>
@@ -115,6 +129,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="projects-cta">
+                    <a href="projects.html" class="btn btn-primary">View All Projects</a>
+                </div>
             </div>
         </section>
 
@@ -139,6 +156,9 @@
                                 <a href="#" target="_blank">linkedin.com/in/yourprofile</a>
                             </div>
                         </div>
+                        <div class="contact-cta">
+                            <a href="contact.html" class="btn btn-primary">Contact Me</a>
+                        </div>
                     </div>
                     <form class="contact-form">
                         <div class="form-group">
@@ -152,6 +172,44 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Send Message</button>
                     </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="blog-preview">
+            <div class="container">
+                <h2>Latest Blog Posts</h2>
+                <div class="blog-preview-grid">
+                    <article class="blog-preview-card">
+                        <div class="blog-preview-meta">
+                            <span class="blog-date">November 15, 2024</span>
+                            <span class="blog-category">JavaScript</span>
+                        </div>
+                        <h3><a href="blog.html">Building Scalable React Applications</a></h3>
+                        <p>Learn how to structure your React applications for scalability and maintainability...</p>
+                        <a href="blog.html" class="read-more">Read More →</a>
+                    </article>
+                    <article class="blog-preview-card">
+                        <div class="blog-preview-meta">
+                            <span class="blog-date">November 10, 2024</span>
+                            <span class="blog-category">CSS</span>
+                        </div>
+                        <h3><a href="blog.html">Modern CSS Techniques</a></h3>
+                        <p>Explore the latest CSS features and techniques for creating beautiful layouts...</p>
+                        <a href="blog.html" class="read-more">Read More →</a>
+                    </article>
+                    <article class="blog-preview-card">
+                        <div class="blog-preview-meta">
+                            <span class="blog-date">November 5, 2024</span>
+                            <span class="blog-category">Node.js</span>
+                        </div>
+                        <h3><a href="blog.html">RESTful API Design</a></h3>
+                        <p>A deep dive into designing robust and scalable RESTful APIs...</p>
+                        <a href="blog.html" class="read-more">Read More →</a>
+                    </article>
+                </div>
+                <div class="blog-cta">
+                    <a href="blog.html" class="btn btn-primary">View All Posts</a>
                 </div>
             </div>
         </section>
