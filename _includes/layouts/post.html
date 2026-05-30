@@ -1,0 +1,28 @@
+---
+layout: layouts/base.html
+---
+
+<article class="post-layout">
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="{{ date }}">{{ date | dateFormat }}</time>
+      <span class="separator">·</span>
+      <span class="reading-time">{{ content | readingTime }}</span>
+    </div>
+    <h1>{{ title }}</h1>
+    {% if description %}
+    <p class="post-description">{{ description }}</p>
+    {% endif %}
+    {% if tags %}
+    <div class="tag-list">
+      {% for tag in tags %}
+      <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </header>
+
+  <div class="post-content prose">
+    {{ content | safe }}
+  </div>
+</article>

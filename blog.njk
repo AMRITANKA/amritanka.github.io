@@ -1,0 +1,38 @@
+---
+layout: layouts/base.html
+title: Blog / Docs
+permalink: /blog/
+---
+
+<h1 class="section-title" style="margin-bottom: 8px;">Blog / Docs</h1>
+<p class="section-subtitle">Tutorials, deep dives, and opinions on software engineering.</p>
+
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="Tutorial">Tutorial</button>
+  <button class="filter-btn" data-filter="Deep Dive">Deep Dive</button>
+  <button class="filter-btn" data-filter="AI">AI</button>
+  <button class="filter-btn" data-filter="DevOps">DevOps</button>
+  <button class="filter-btn" data-filter="Java">Java</button>
+</div>
+
+<div class="card-grid">
+  {% for post in collections.posts %}
+  <div class="card" data-tags="{{ post.data.tags | join(',') }}">
+    <div class="card-meta">
+      <time>{{ post.data.date | dateFormat }}</time>
+      <span>{{ post.content | readingTime }}</span>
+      {% if post.data.category %}
+      <span class="tag">{{ post.data.category }}</span>
+      {% endif %}
+    </div>
+    <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+    <p>{{ post.data.description }}</p>
+    <div class="tag-list">
+      {% for tag in post.data.tags %}
+      <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>

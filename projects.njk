@@ -1,0 +1,38 @@
+---
+layout: layouts/base.html
+title: Projects
+permalink: /projects/
+---
+
+<h1 class="section-title" style="margin-bottom: 8px;">Projects</h1>
+<p class="section-subtitle">Open-source work, side projects, and experiments.</p>
+
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="Java">Java</button>
+  <button class="filter-btn" data-filter="Spring Boot">Spring Boot</button>
+  <button class="filter-btn" data-filter="Spring AI">Spring AI</button>
+  <button class="filter-btn" data-filter="React">React</button>
+  <button class="filter-btn" data-filter="AI">AI</button>
+  <button class="filter-btn" data-filter="DevOps">DevOps</button>
+</div>
+
+<div class="card-grid">
+  {% for project in collections.projects %}
+  <div class="card" data-tags="{{ project.data.tags | join(',') }}">
+    <div class="card-meta">
+      <time>{{ project.data.date | dateFormat }}</time>
+      {% if project.data.status %}
+      <span class="status-badge status-{{ project.data.status }}">{{ project.data.status }}</span>
+      {% endif %}
+    </div>
+    <h3><a href="{{ project.url }}">{{ project.data.title }}</a></h3>
+    <p>{{ project.data.description }}</p>
+    <div class="tag-list">
+      {% for tag in project.data.tags %}
+      <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>

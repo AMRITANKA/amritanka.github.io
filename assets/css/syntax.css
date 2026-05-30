@@ -1,0 +1,21 @@
+/* Override Prism for dark mode consistency */
+html.dark pre[class*="language-"],
+html.dark code[class*="language-"] {
+  background: var(--bg-secondary);
+  color: #e4e4e7;
+  text-shadow: none;
+}
+
+/* Copy button for code blocks */
+.code-block-wrapper {
+  position: relative;
+}
+.copy-btn {
+  position: absolute; top: 8px; right: 8px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 6px; padding: 4px 10px; font-size: 0.75rem;
+  cursor: pointer; color: var(--text-muted);
+  opacity: 0; transition: opacity 0.2s;
+}
+pre:hover .copy-btn { opacity: 1; }
+.copy-btn:hover { color: var(--text); border-color: var(--text-muted); }
