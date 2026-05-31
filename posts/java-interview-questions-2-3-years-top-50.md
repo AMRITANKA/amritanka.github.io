@@ -1,40 +1,1421 @@
 ---
 layout: layouts/post.html
-title: "Java Interview Questions and Answers for 2 to 3 Years Experienced: Top 50"
+title: "Java Interview Questions and Answers for 2–3 Years Experienced Developers: Most Frequently Asked Questions"
 date: 2026-05-30
-description: "Top 50 Java interview questions with crisp answers for 2–3 years experienced developers (Core Java, OOP, Collections, Concurrency, JVM, and Java 8+)."
+description: "Most frequently asked Java interview questions and answers for 2–3 years experienced developers, covering Core Java, OOP, Collections, Concurrency, JVM, and Java 8+ features."
 tags: ["Java", "Interview", "Core Java", "Collections", "Multithreading", "JVM"]
 category: "Interview"
 ---
+This guide contains the most frequently asked Java interview questions and answers for developers with 2–3 years of experience. It covers Core Java, OOP Concepts, Collections Framework, Exception Handling, Multithreading, JVM Architecture, Class Loading, Java 8 Features, and other key topics commonly asked in technical interviews.
+---
 
-This post is a curated list of **50 high-frequency Java interview questions** with practical, to-the-point answers—ideal for **2–3 years experienced** developers.
+<h1 style="text-decoration: underline;">1) Method Overloading vs Method Overriding in Java</h1>
+
+## Introduction
+
+Method Overloading and Method Overriding are two important concepts in Java that support **Polymorphism**. Although their names sound similar, they serve different purposes and work differently.
 
 ---
 
-## 1) Method Overloading vs Method Overriding
-**Overloading**: Same method name, different parameter list (compile-time / static polymorphism).
+# Method Overloading
 
-**Overriding**: Same method signature in subclass with specific implementation (runtime / dynamic polymorphism).
+## Definition
 
----
+Method Overloading occurs when multiple methods in the same class have the **same name** but **different parameter lists**.
 
-## 2) What is a ClassLoader in Java?
-A **ClassLoader** loads `.class` bytecode into the JVM.
-
-Common types:
-- **Bootstrap**: loads core Java classes (from the JRE).
-- **Extension / Platform**: loads platform extensions.
-- **System / Application**: loads classes from the application classpath.
+This is also known as **Compile-Time Polymorphism** because the compiler determines which method to call during compilation.
 
 ---
 
-## 3) What is inheritance in Java?
-Inheritance lets a class **reuse** properties/behaviors of another class (`extends`). It supports:
-- **Code reuse**
-- **Method overriding**
-- **Polymorphism**
+## Rules for Method Overloading
+
+✅ Method name must be the same
+
+✅ Parameters must be different:
+
+* Different number of parameters
+* Different data types
+* Different order of parameters
+
+✅ Return type may be different
+
+❌ Changing only the return type is not considered overloading
 
 ---
+
+## Example
+
+```java
+class Calculator {
+
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    double add(double a, double b) {
+        return a + b;
+    }
+
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+}
+```
+
+### Output
+
+```java
+Calculator calc = new Calculator();
+
+System.out.println(calc.add(10, 20));        // 30
+System.out.println(calc.add(10.5, 20.5));    // 31.0
+System.out.println(calc.add(10, 20, 30));    // 60
+```
+
+---
+
+## Advantages of Overloading
+
+* Improves code readability
+* Increases code reusability
+* Allows methods to perform similar operations with different inputs
+
+---
+
+# Method Overriding
+
+## Definition
+
+Method Overriding occurs when a child class provides its own implementation of a method that already exists in the parent class.
+
+This is also known as **Runtime Polymorphism** because the method call is resolved during execution.
+
+---
+
+## Rules for Method Overriding
+
+✅ Requires inheritance
+
+✅ Method name must be the same
+
+✅ Parameters must be exactly the same
+
+✅ Return type must be same or covariant
+
+✅ Access modifier cannot be more restrictive
+
+❌ Static methods cannot be overridden
+
+❌ Final methods cannot be overridden
+
+❌ Private methods cannot be overridden
+
+---
+
+## Example
+
+```java
+class Animal {
+
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Test {
+
+    public static void main(String[] args) {
+
+        Animal animal = new Dog();
+        animal.sound();
+    }
+}
+```
+
+### Output
+
+```text
+Dog barks
+```
+
+---
+
+## Why Runtime Polymorphism?
+
+```java
+Animal animal = new Dog();
+animal.sound();
+```
+
+Although the reference type is `Animal`, the actual object is `Dog`.
+
+At runtime, Java determines which method implementation should be executed.
+
+This process is called **Dynamic Method Dispatch**.
+
+---
+
+# Comparison Table
+
+| Feature              | Method Overloading                         | Method Overriding                                   |
+| -------------------- | ------------------------------------------ | --------------------------------------------------- |
+| Definition           | Same method name with different parameters | Same method implementation redefined in child class |
+| Inheritance Required | No                                         | Yes                                                 |
+| Method Name          | Same                                       | Same                                                |
+| Parameters           | Must be different                          | Must be same                                        |
+| Return Type          | Can differ                                 | Same or Covariant                                   |
+| Binding              | Compile Time                               | Runtime                                             |
+| Polymorphism Type    | Static Polymorphism                        | Dynamic Polymorphism                                |
+| Performance          | Faster                                     | Slightly slower due to runtime resolution           |
+| Annotation           | Not required                               | @Override recommended                               |
+
+---
+
+# Interview Questions
+
+## 1.1 Can we overload a method by changing only the return type?
+
+No.
+
+```java
+int add(int a, int b)
+double add(int a, int b) // Compilation Error
+```
+
+The parameter list must be different.
+
+---
+
+## 1.2 Can static methods be overridden?
+
+No.
+
+Static methods belong to the class rather than objects.
+
+```java
+class Parent {
+    static void show() {}
+}
+
+class Child extends Parent {
+    static void show() {}
+}
+```
+
+This is called **Method Hiding**, not Overriding.
+
+---
+
+## 1.3 Can final methods be overridden?
+
+No.
+
+```java
+class Parent {
+
+    final void display() {
+    }
+}
+
+class Child extends Parent {
+
+    // Compilation Error
+    void display() {
+    }
+}
+```
+
+---
+
+## 1.4 Can private methods be overridden?
+
+No.
+
+Private methods are not inherited by child classes.
+
+---
+
+## 1.5 Can constructors be overloaded?
+
+Yes.
+
+```java
+class Employee {
+
+    Employee() {
+    }
+
+    Employee(int id) {
+    }
+
+    Employee(int id, String name) {
+    }
+}
+```
+
+Constructors support overloading but not overriding.
+
+---
+
+# Real-World Example
+
+Consider a payment application.
+
+### Method Overloading
+
+```java
+class PaymentService {
+
+    void pay(double amount) {
+    }
+
+    void pay(double amount, String couponCode) {
+    }
+
+    void pay(double amount, String couponCode, boolean useWallet) {
+    }
+}
+```
+
+Same operation with different inputs.
+
+---
+
+### Method Overriding
+
+```java
+class Payment {
+
+    void processPayment() {
+        System.out.println("Generic Payment");
+    }
+}
+
+class CreditCardPayment extends Payment {
+
+    @Override
+    void processPayment() {
+        System.out.println("Credit Card Payment");
+    }
+}
+
+class UpiPayment extends Payment {
+
+    @Override
+    void processPayment() {
+        System.out.println("UPI Payment");
+    }
+}
+```
+
+Same method with different implementations.
+
+---
+
+# Key Takeaways
+
+### Method Overloading
+
+* Same method name
+* Different parameters
+* Same class
+* Compile-time polymorphism
+* No inheritance required
+
+### Method Overriding
+
+* Same method signature
+* Child class redefines parent method
+* Requires inheritance
+* Runtime polymorphism
+* Supports dynamic behavior
+
+---
+
+# Easy Way to Remember
+
+**Overloading = Same Method + Different Inputs**
+
+**Overriding = Same Method + Different Behavior**
+
+Example:
+
+```text
+Overloading → One person speaking multiple languages.
+
+Overriding → Son follows his own way instead of his father's way.
+```
+
+Both concepts are fundamental to writing flexible, reusable, and object-oriented Java applications.
+
+
+---
+
+<h1 style="text-decoration: underline;">2) What is a ClassLoader in Java?</h1>
+
+## Introduction
+
+A **ClassLoader** in Java is a part of the Java Runtime Environment (JRE) responsible for **loading Java classes into memory dynamically at runtime**.
+
+When a Java program starts, classes are not loaded into memory all at once. Instead, the JVM loads classes only when they are needed. This process is handled by the ClassLoader subsystem.
+
+In simple terms:
+
+> A ClassLoader is a JVM component that loads `.class` files into memory and makes them available for execution.
+
+---
+
+# Why Do We Need a ClassLoader?
+
+Consider the following code:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Employee emp = new Employee();
+    }
+}
+```
+
+Before the JVM can create the `Employee` object:
+
+1. It must locate the `Employee.class` file.
+2. Load the bytecode into memory.
+3. Verify the bytecode.
+4. Link the class.
+5. Initialize the class.
+
+The ClassLoader performs these tasks automatically.
+
+---
+
+# Class Loading Process
+
+The JVM loads classes in three major phases:
+
+## 1. Loading
+
+The JVM reads the `.class` file and creates a corresponding `Class` object.
+
+```java
+Class<?> cls = Employee.class;
+```
+
+At this stage, the bytecode is loaded into memory.
+
+---
+
+## 2. Linking
+
+Linking consists of three steps:
+
+### Verification
+
+Checks whether the bytecode is valid and secure.
+
+### Preparation
+
+Allocates memory for static variables.
+
+```java
+static int count;
+```
+
+Memory is allocated and initialized with default values.
+
+### Resolution
+
+Converts symbolic references into direct memory references.
+
+---
+
+## 3. Initialization
+
+Static variables and static blocks are executed.
+
+```java
+class Employee {
+
+    static {
+        System.out.println("Class Initialized");
+    }
+}
+```
+
+Output:
+
+```text
+Class Initialized
+```
+
+---
+
+# Types of ClassLoaders in Java
+
+Java uses a hierarchy of ClassLoaders.
+
+```text
+Bootstrap ClassLoader
+        ↑
+Platform ClassLoader
+        ↑
+Application ClassLoader
+```
+
+---
+
+## 1. Bootstrap ClassLoader
+
+### Responsibility
+
+Loads core Java classes.
+
+Examples:
+
+```java
+java.lang.String
+java.lang.Object
+java.util.ArrayList
+java.util.HashMap
+```
+
+### Location
+
+Loads classes from:
+
+```text
+<JAVA_HOME>/lib
+```
+
+### Example
+
+```java
+System.out.println(String.class.getClassLoader());
+```
+
+Output:
+
+```text
+null
+```
+
+Why null?
+
+Bootstrap ClassLoader is implemented in native code and is not represented as a Java object.
+
+---
+
+## 2. Platform ClassLoader
+
+Introduced in Java 9.
+
+### Responsibility
+
+Loads Java platform modules and extension libraries.
+
+### Example
+
+```java
+System.out.println(
+    java.sql.Driver.class.getClassLoader()
+);
+```
+
+Typical Output:
+
+```text
+jdk.internal.loader.ClassLoaders$PlatformClassLoader
+```
+
+---
+
+## 3. Application ClassLoader
+
+Also known as:
+
+```text
+System ClassLoader
+```
+
+### Responsibility
+
+Loads classes available in:
+
+```text
+Classpath
+```
+
+Examples:
+
+* User-created classes
+* Third-party libraries
+* Maven dependencies
+* Spring Boot classes
+
+### Example
+
+```java
+System.out.println(
+    Employee.class.getClassLoader()
+);
+```
+
+Output:
+
+```text
+jdk.internal.loader.ClassLoaders$AppClassLoader
+```
+
+---
+
+# Parent Delegation Model
+
+Java ClassLoaders follow the **Parent Delegation Principle**.
+
+Before loading a class, a ClassLoader asks its parent to load it first.
+
+```text
+Application ClassLoader
+          |
+          V
+Platform ClassLoader
+          |
+          V
+Bootstrap ClassLoader
+```
+
+---
+
+## Example
+
+When loading:
+
+```java
+String str = "Hello";
+```
+
+The Application ClassLoader asks:
+
+1. Platform ClassLoader
+2. Bootstrap ClassLoader
+
+Bootstrap ClassLoader already knows about `String.class`, so it loads the class.
+
+This prevents duplicate loading and improves security.
+
+---
+
+# How to Check Which ClassLoader Loaded a Class?
+
+```java
+public class Test {
+
+    public static void main(String[] args) {
+
+        System.out.println(
+            String.class.getClassLoader()
+        );
+
+        System.out.println(
+            Test.class.getClassLoader()
+        );
+    }
+}
+```
+
+Output:
+
+```text
+null
+jdk.internal.loader.ClassLoaders$AppClassLoader
+```
+
+---
+
+# Custom ClassLoader
+
+Java allows developers to create their own ClassLoaders.
+
+Example use cases:
+
+* Application servers
+* Plugin architectures
+* Hot deployment
+* Dynamic module loading
+* Security frameworks
+
+Example:
+
+```java
+public class MyClassLoader extends ClassLoader {
+
+    @Override
+    protected Class<?> findClass(String name)
+            throws ClassNotFoundException {
+
+        // Custom loading logic
+
+        return super.findClass(name);
+    }
+}
+```
+
+---
+
+# Real-World Example
+
+## Spring Boot
+
+When a Spring Boot application starts:
+
+1. JVM starts.
+2. Application ClassLoader loads Spring classes.
+3. Spring scans components.
+4. Classes are loaded dynamically.
+5. Beans are created.
+
+Without ClassLoaders, dynamic frameworks like Spring would not work efficiently.
+
+---
+
+# Interview Questions
+
+## 2.1 What is a ClassLoader?
+
+A ClassLoader is a JVM component responsible for loading Java classes into memory dynamically during runtime.
+
+---
+
+## 2.2 How many built-in ClassLoaders are there?
+
+Three:
+
+1. Bootstrap ClassLoader
+2. Platform ClassLoader
+3. Application ClassLoader
+
+---
+
+## 2.3 What is Parent Delegation?
+
+A mechanism where a ClassLoader delegates class-loading requests to its parent before attempting to load the class itself.
+
+---
+
+## 2.4 Why does `String.class.getClassLoader()` return null?
+
+Because `String` is loaded by the Bootstrap ClassLoader, which is implemented in native code and not represented as a Java object.
+
+---
+
+## 2.5 Can we create a custom ClassLoader?
+
+Yes.
+
+By extending the `ClassLoader` class and overriding methods such as:
+
+```java
+findClass()
+loadClass()
+```
+
+---
+
+# ClassLoader vs JVM Memory Areas
+
+| Component         | Responsibility                          |
+| ----------------- | --------------------------------------- |
+| ClassLoader       | Loads classes into memory               |
+| Heap              | Stores objects                          |
+| Stack             | Stores method calls and local variables |
+| Method Area       | Stores class metadata                   |
+| Garbage Collector | Removes unused objects                  |
+
+---
+
+# Key Takeaways
+
+* ClassLoader loads Java classes dynamically at runtime.
+* JVM uses lazy loading to improve performance.
+* Java provides three built-in ClassLoaders:
+
+  * Bootstrap
+  * Platform
+  * Application
+* ClassLoaders follow the Parent Delegation Model.
+* Custom ClassLoaders enable advanced features such as plugins and hot deployment.
+* Every Java application relies on ClassLoaders behind the scenes.
+
+---
+
+# Easy Way to Remember
+
+```text
+ClassLoader = Librarian of the JVM
+
+Just as a librarian finds and brings the correct book
+when requested, the ClassLoader finds and loads the
+required class when the JVM needs it.
+```
+
+
+<h1 style="text-decoration: underline;"> 3) What is inheritance in Java?</h1>
+
+## Introduction
+
+**Inheritance** is one of the four fundamental principles of Object-Oriented Programming (OOP).
+
+Inheritance allows one class to acquire the properties and behaviors (fields and methods) of another class.
+
+In simple terms:
+
+> Inheritance is a mechanism through which a child class can reuse the code of an existing parent class.
+
+This promotes:
+
+* Code Reusability
+* Maintainability
+* Extensibility
+* Polymorphism
+
+---
+
+# Real-Life Example
+
+Consider a family relationship:
+
+```text
+Parent
+   │
+   ▼
+Child
+```
+
+A child inherits characteristics from its parent.
+
+Similarly in Java:
+
+```text
+Animal
+   │
+   ▼
+Dog
+```
+
+The `Dog` class inherits properties and methods from the `Animal` class.
+
+---
+
+# Syntax of Inheritance
+
+Java uses the `extends` keyword.
+
+```java
+class Parent {
+    // properties and methods
+}
+
+class Child extends Parent {
+    // additional properties and methods
+}
+```
+
+---
+
+# Basic Example
+
+```java
+class Animal {
+
+    void eat() {
+        System.out.println("Animal is eating");
+    }
+}
+
+class Dog extends Animal {
+
+    void bark() {
+        System.out.println("Dog is barking");
+    }
+}
+
+public class Test {
+
+    public static void main(String[] args) {
+
+        Dog dog = new Dog();
+
+        dog.eat();
+        dog.bark();
+    }
+}
+```
+
+### Output
+
+```text
+Animal is eating
+Dog is barking
+```
+
+---
+
+# How Inheritance Works
+
+## Diagram
+
+```text
+        +----------------+
+        |    Animal      |
+        +----------------+
+        | + eat()        |
+        +----------------+
+                ▲
+                │ extends
+                │
+        +----------------+
+        |      Dog       |
+        +----------------+
+        | + bark()       |
+        +----------------+
+```
+
+The `Dog` class can use:
+
+* Its own methods
+* Methods inherited from `Animal`
+
+---
+
+# Why Use Inheritance?
+
+Without inheritance:
+
+```java
+class Dog {
+
+    void eat() {
+        System.out.println("Animal is eating");
+    }
+
+    void bark() {
+        System.out.println("Dog barking");
+    }
+}
+
+class Cat {
+
+    void eat() {
+        System.out.println("Animal is eating");
+    }
+
+    void meow() {
+        System.out.println("Cat meowing");
+    }
+}
+```
+
+Problem:
+
+* Duplicate code
+* Difficult maintenance
+
+With inheritance:
+
+```java
+class Animal {
+
+    void eat() {
+        System.out.println("Animal is eating");
+    }
+}
+
+class Dog extends Animal {
+}
+
+class Cat extends Animal {
+}
+```
+
+Benefit:
+
+* Reusable code
+* Cleaner design
+
+---
+
+# Types of Inheritance in Java
+
+Java supports inheritance through classes and interfaces.
+
+---
+
+## 1. Single Inheritance
+
+One child inherits from one parent.
+
+### Diagram
+
+```text
+Animal
+   │
+   ▼
+Dog
+```
+
+### Example
+
+```java
+class Animal {
+    void eat() {
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+    }
+}
+```
+
+---
+
+## 2. Multilevel Inheritance
+
+A class inherits from another child class.
+
+### Diagram
+
+```text
+Animal
+   │
+   ▼
+Dog
+   │
+   ▼
+Puppy
+```
+
+### Example
+
+```java
+class Animal {
+    void eat() {
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+    }
+}
+
+class Puppy extends Dog {
+    void play() {
+    }
+}
+```
+
+---
+
+## 3. Hierarchical Inheritance
+
+Multiple child classes inherit from the same parent.
+
+### Diagram
+
+```text
+             Animal
+           /    |    \
+          /     |     \
+         ▼      ▼      ▼
+       Dog     Cat    Lion
+```
+
+### Example
+
+```java
+class Animal {
+    void eat() {
+    }
+}
+
+class Dog extends Animal {
+}
+
+class Cat extends Animal {
+}
+
+class Lion extends Animal {
+}
+```
+
+---
+
+## 4. Multiple Inheritance (Through Interfaces)
+
+Java does not support multiple inheritance with classes.
+
+❌ Not Allowed
+
+```java
+class A {
+}
+
+class B {
+}
+
+class C extends A, B {
+}
+```
+
+Reason:
+
+The Diamond Problem.
+
+---
+
+### Multiple Inheritance Using Interfaces
+
+✅ Allowed
+
+```java
+interface Flyable {
+    void fly();
+}
+
+interface Swimmable {
+    void swim();
+}
+
+class Duck implements Flyable, Swimmable {
+
+    public void fly() {
+        System.out.println("Flying");
+    }
+
+    public void swim() {
+        System.out.println("Swimming");
+    }
+}
+```
+
+---
+
+# The Diamond Problem
+
+Imagine:
+
+```text
+          Animal
+          /    \
+         /      \
+        ▼        ▼
+     Bird      Fish
+         \      /
+          \    /
+           Duck
+```
+
+If both `Bird` and `Fish` have the same method:
+
+```java
+void move()
+```
+
+Which implementation should `Duck` inherit?
+
+To avoid this ambiguity, Java does not allow multiple inheritance with classes.
+
+---
+
+# The super Keyword
+
+The `super` keyword is used to access parent class members.
+
+---
+
+## Access Parent Method
+
+```java
+class Animal {
+
+    void sound() {
+        System.out.println("Animal Sound");
+    }
+}
+
+class Dog extends Animal {
+
+    void sound() {
+        super.sound();
+        System.out.println("Dog Bark");
+    }
+}
+```
+
+Output:
+
+```text
+Animal Sound
+Dog Bark
+```
+
+---
+
+## Call Parent Constructor
+
+```java
+class Animal {
+
+    Animal() {
+        System.out.println("Animal Constructor");
+    }
+}
+
+class Dog extends Animal {
+
+    Dog() {
+        super();
+        System.out.println("Dog Constructor");
+    }
+}
+```
+
+Output:
+
+```text
+Animal Constructor
+Dog Constructor
+```
+
+---
+
+# Inheritance and Method Overriding
+
+Inheritance enables Runtime Polymorphism through Method Overriding.
+
+```java
+class Animal {
+
+    void sound() {
+        System.out.println("Animal Sound");
+    }
+}
+
+class Dog extends Animal {
+
+    @Override
+    void sound() {
+        System.out.println("Dog Bark");
+    }
+}
+```
+
+---
+
+# Real-World Example
+
+## Banking Application
+
+```text
+                 Account
+                    ▲
+       ┌────────────┼────────────┐
+       │            │            │
+       ▼            ▼            ▼
+ SavingsAccount CurrentAccount LoanAccount
+```
+
+### Parent Class
+
+```java
+class Account {
+
+    void deposit() {
+        System.out.println("Deposit Money");
+    }
+
+    void withdraw() {
+        System.out.println("Withdraw Money");
+    }
+}
+```
+
+### Child Class
+
+```java
+class SavingsAccount extends Account {
+
+    void calculateInterest() {
+        System.out.println("Calculating Interest");
+    }
+}
+```
+
+Benefit:
+
+* Common functionality remains in one place.
+* Child classes add specialized behavior.
+
+---
+
+# Advantages of Inheritance
+
+### Code Reusability
+
+Write once, use many times.
+
+### Easy Maintenance
+
+Changes in parent class are inherited automatically.
+
+### Better Code Organization
+
+Common functionality stays in the parent class.
+
+### Supports Polymorphism
+
+Allows dynamic method dispatch.
+
+### Extensibility
+
+New child classes can be added easily.
+
+---
+
+# Disadvantages of Inheritance
+
+### Tight Coupling
+
+Child classes depend heavily on parent classes.
+
+### Reduced Flexibility
+
+Changes in parent class may affect all child classes.
+
+### Deep Hierarchies Become Complex
+
+Too many inheritance levels make maintenance difficult.
+
+---
+
+# Interview Questions
+
+## 3.1 What is Inheritance?
+
+Inheritance is a mechanism that allows one class to acquire the properties and methods of another class.
+
+---
+
+## 3.2 Which keyword is used for inheritance?
+
+```java
+extends
+```
+
+---
+
+## 3.3 Does Java support multiple inheritance?
+
+No, not through classes.
+
+Java supports multiple inheritance using interfaces.
+
+---
+
+## 3.4 What is the advantage of inheritance?
+
+* Code reuse
+* Better maintainability
+* Supports polymorphism
+
+---
+
+## 3.5 What is the difference between Inheritance and Composition?
+
+### Inheritance
+
+```text
+IS-A Relationship
+```
+
+Example:
+
+```text
+Dog IS-A Animal
+```
+
+### Composition
+
+```text
+HAS-A Relationship
+```
+
+Example:
+
+```text
+Car HAS-A Engine
+```
+
+---
+
+# Inheritance vs Composition
+
+| Feature                    | Inheritance | Composition |
+| -------------------------- | ----------- | ----------- |
+| Relationship               | IS-A        | HAS-A       |
+| Coupling                   | Tight       | Loose       |
+| Reusability                | High        | High        |
+| Flexibility                | Less        | More        |
+| Preferred in Modern Design | No          | Yes         |
+
+---
+
+# Key Takeaways
+
+* Inheritance is an OOP concept that enables code reuse.
+* Java uses the `extends` keyword for inheritance.
+* A child class inherits fields and methods from a parent class.
+* Java supports:
+
+  * Single Inheritance
+  * Multilevel Inheritance
+  * Hierarchical Inheritance
+* Multiple inheritance is supported through interfaces.
+* Inheritance is the foundation for Method Overriding and Runtime Polymorphism.
+* Modern application design often prefers Composition over deep inheritance hierarchies.
+
+---
+
+# Easy Way to Remember
+
+```text
+Inheritance = "IS-A" Relationship
+
+Dog IS-A Animal
+Car IS-A Vehicle
+Manager IS-A Employee
+
+Composition = "HAS-A" Relationship
+
+Car HAS-A Engine
+House HAS-A Room
+Computer HAS-A CPU
+```
+
+A simple rule:
+
+> If one object "is a type of" another object, use Inheritance.
+>
+> If one object "contains" another object, use Composition.
+
 
 ## 4) Why can’t we override a static method?
 Static methods belong to the **class**, not the object. Overriding is based on **runtime polymorphism**, but static method binding happens at **compile time**.
