@@ -10,8 +10,6 @@ featured: true
 status: "active"
 ---
 
-## TL;DR
-
 **Spring AI Assistant** is a production-ready, multi-tenant conversational AI platform built on **Spring Boot 3.3** and **Spring AI 1.0**. It wraps **Azure OpenAI (GPT-4o)** behind a clean, reactive REST API and ships with the things real enterprises actually need: **streaming chat (SSE)**, **persistent conversation memory**, **RAG over private documents** with **pgvector**, **tool/function calling**, **Azure AD authentication**, **rate limiting**, **token & cost tracking**, **Prometheus/OpenTelemetry observability**, and **CI/CD to Azure Container Apps**.
 
 This post walks through the architecture, the most interesting design decisions, and the pieces that turned out to be harder than they looked.
