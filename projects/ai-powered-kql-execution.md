@@ -33,35 +33,9 @@ The service is a small, focused pipeline combining an Express API, a schema cach
                                       Examples
 ```
 
-### Sequence (Mermaid)
+### Sequence Diagram
 
-```mermaid
-sequenceDiagram
-  participant C as Client
-  participant API as Express API
-  participant LLM as LLM Service
-  participant S as Schema Manager
-  participant AI as App Insights
-
-  C->>API: POST /api/v1/query {query, type, output}
-  API->>API: Auth + Rate limit + Validation
-  API->>S: fetch schema (if needed)
-  alt type == natural
-    API->>LLM: generate KQL (system prompt + schema + few-shot)
-    LLM-->>API: KQL
-    API->>API: validate KQL
-  else type == kql
-    API->>API: validate KQL
-  end
-  API->>AI: execute KQL
-  alt execution error
-    API->>LLM: ask to self-correct KQL
-    LLM-->>API: corrected KQL
-    API->>AI: execute corrected KQL
-  end
-  AI-->>API: results
-  API-->>C: formatted response (JSON/CSV/Table)
-```
+![Sequence Diagram](../assets/images/SequenceKQL.jpg)
 
 ## Tech Stack
 
