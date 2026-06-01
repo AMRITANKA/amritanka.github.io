@@ -114,8 +114,7 @@ your-spring-boot-project/
 ## Step 2: The Complete Workflow File
 
 Create `.github/workflows/ci-cd.yml`:
-
-```yaml
+{% raw %}```yaml
 name: CI/CD Pipeline
 
 # ──────────────────────────────────────────────
@@ -245,6 +244,7 @@ jobs:
           resourceGroup: ${{ secrets.RESOURCE_GROUP }}
           imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/myapp:${{ github.sha }}
 ```
+{% endraw %}
 
 ### Line-by-Line Breakdown
 
@@ -565,6 +565,7 @@ Get notified when your pipeline succeeds or fails.
 
 ### Slack Notification
 
+{% raw %}
 ```yaml
   notify:
     name: 📢 Notify Team
@@ -582,6 +583,7 @@ Get notified when your pipeline succeeds or fails.
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
+{% endraw %}
 
 ### Adding a Status Badge
 
@@ -613,6 +615,7 @@ The `cache: 'maven'` option in `actions/setup-java` caches the `~/.m2/repository
 
 For more granular cache control:
 
+{% raw %}
 ```yaml
 - uses: actions/cache@v4
   with:
@@ -621,6 +624,7 @@ For more granular cache control:
     restore-keys: |
       ${{ runner.os }}-maven-
 ```
+{% endraw %}
 
 ### Branch Protection Rules
 
