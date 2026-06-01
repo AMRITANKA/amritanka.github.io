@@ -1411,7 +1411,7 @@ Before adopting any pattern, run it through this checklist:
     └──────────────────┘  └──────────────────┘  └──────────────────┘
 ```
 
-## The Real Advice
+## Note
 
 Start with a **modular monolith**. Extract services when you have a clear scaling or team boundary reason. Every service boundary is a network call — and network calls fail, have latency, and need monitoring. Don't pay that tax until you have to.
 
