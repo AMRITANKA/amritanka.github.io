@@ -35,7 +35,7 @@ The service is a small, focused pipeline combining an Express API, a schema cach
 
 ### Sequence Diagram
 
-![Sequence Diagram](../assets/images/SequenceKQL.jpg)
+![Sequence Diagram](/assets/images/SequenceKQL.jpg)
 
 ## Tech Stack
 
@@ -53,7 +53,7 @@ The service is a small, focused pipeline combining an Express API, a schema cach
 1. Install dependencies and run:
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/AMRITANKA/AI-Powered-KQLExecutionService.git
 cd AI-Powered-KQLExecutionService
 npm install
 ```
