@@ -134,7 +134,7 @@ Customers interact purely through natural WhatsApp messages:
         ▼
 4. OrderProcessor parses items → calculates total → saves draft
 
-5. Bot asks: "Confirm your order? Total: $24.50 — Reply CONFIRM or CANCEL"
+5. Bot asks: "Confirm your order? Total: $75.50 — Reply CONFIRM or CANCEL"
 
 6. Customer replies "CONFIRM"
         │
@@ -291,8 +291,8 @@ The visual editor makes it trivially easy to extend the workflow — add an emai
 ### 1. Clone and Install
 
 ```bash
-git clone https://github.com/amritanka/n8n-whatsapp-automation.git
-cd n8n-whatsapp-automation
+git clone https://github.com/amritanka/n8n-whatsapp-order-automation
+cd n8n-whatsapp-order-automation
 npm install
 ```
 
