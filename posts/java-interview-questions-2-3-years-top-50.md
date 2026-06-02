@@ -9,7 +9,66 @@ category: "Interview"
 This guide contains the most frequently asked Java interview questions and answers for developers with 2–3 years of experience. It covers Core Java, OOP Concepts, Collections Framework, Exception Handling, Multithreading, JVM Architecture, Class Loading, Java 8 Features, and other key topics commonly asked in technical interviews.
 ---
 
-<h1 style="text-decoration: underline;">1) Method Overloading vs Method Overriding in Java</h1>
+## Table of Contents
+
+<div class="toc">
+
+1. [Method Overloading vs Method Overriding in Java](#method-overloading-vs-method-overriding-in-java)
+2. [What is a ClassLoader in Java?](#what-is-a-classloader-in-java)
+3. [What is inheritance in Java?](#what-is-inheritance-in-java)
+4. [Why can't we override a static method?](#why-cant-we-override-a-static-method)
+5. [What is Dynamic Method Dispatch?](#what-is-dynamic-method-dispatch)
+6. [What is Java Classpath?](#what-is-java-classpath)
+7. [What does the `volatile` keyword do?](#what-does-the-volatile-keyword-do)
+8. [When does `finally` not execute?](#when-does-finally-not-execute)
+9. [StringBuffer vs StringBuilder](#stringbuffer-vs-stringbuilder)
+10. [Vector vs ArrayList](#vector-vs-arraylist)
+11. [Why is String immutable?](#why-is-string-immutable)
+12. [HashMap vs HashSet](#hashmap-vs-hashset)
+13. [Producer–Consumer problem & benefits](#producer-consumer-problem-benefits)
+14. [How to create an immutable class?](#how-to-create-an-immutable-class)
+15. [Fail-fast vs Fail-safe iterators](#fail-fast-vs-fail-safe-iterators)
+16. [What is an interface? Features?](#what-is-an-interface-features)
+17. [SOLID principles](#solid-principles)
+18. [What is the difference between `==` and `equals()`?](#what-is-the-difference-between-and-equals)
+19. [What is the `instanceof` operator?](#what-is-the-instanceof-operator)
+20. [`super` keyword use cases](#super-keyword-use-cases)
+21. [What is `finalize()`? Why discouraged?](#what-is-finalize-why-discouraged)
+22. [What are the main Collections Framework interfaces?](#what-are-the-main-collections-framework-interfaces)
+23. [What is a Thread? How to Create a Thread in Java?](#what-is-a-thread-how-to-create-a-thread-in-java)
+24. [What is a Virtual Thread in Java? How to Create It? When to Use It?](#what-is-a-virtual-thread-in-java-how-to-create-it-when-to-use-it)
+25. [What is deadlock? How to avoid?](#what-is-deadlock-how-to-avoid)
+26. [What is synchronization?](#what-is-synchronization)
+27. [Shallow Copy vs Deep Copy in Java](#shallow-copy-vs-deep-copy-in-java)
+28. [What Are Annotations in Java? How to Create a Custom Annotation?](#what-are-annotations-in-java-how-to-create-a-custom-annotation)
+29. [What is the Java Memory Model (JMM)?](#what-is-the-java-memory-model-jmm)
+30. [What is Reflection in Java?](#what-is-reflection-in-java)
+31. [What Does `join()` Do in Java?](#what-does-join-do-in-java)
+32. [Benefits of Java Stream API](#benefits-of-java-stream-api)
+33. [What is Try-With-Resources in Java?](#what-is-try-with-resources-in-java)
+34. [Comparable vs Comparator in Java](#comparable-vs-comparator-in-java)
+35. [What is a Marker Interface in Java?](#what-is-a-marker-interface-in-java)
+36. [What is `clone()` in Java?](#what-is-clone-in-java)
+37. [What Are Default Methods in Interfaces?](#what-are-default-methods-in-interfaces)
+38. [What Are Checked vs Unchecked Exceptions in Java?](#what-are-checked-vs-unchecked-exceptions-in-java)
+39. [Difference between `throw` and `throws`](#difference-between-throw-and-throws)
+40. [What is `Optional` in Java?](#what-is-optional-in-java)
+41. [What is a functional interface?](#what-is-a-functional-interface)
+42. [What Are Lambda Expressions in Java?](#what-are-lambda-expressions-in-java)
+43. [When to Use Abstract Class and When to Use Interface in Java?](#when-to-use-abstract-class-and-when-to-use-interface-in-java)
+44. [What is Serialization in Java?](#what-is-serialization-in-java)
+45. [Difference Between `HashMap` and `ConcurrentHashMap` in Java](#difference-between-hashmap-and-concurrenthashmap-in-java)
+46. [Difference Between `ArrayList` and `LinkedList` in Java](#difference-between-arraylist-and-linkedlist-in-java)
+47. [Difference Between `map()` and `flatMap()` in Java Streams](#difference-between-map-and-flatmap-in-java-streams)
+48. [What is a Race Condition in Java?](#what-is-a-race-condition-in-java)
+49. [What Are Atomic Classes in Java?](#what-are-atomic-classes-in-java)
+50. [JVM vs JRE vs JDK in Java](#jvm-vs-jre-vs-jdk-in-java)
+
+</div>
+
+---
+
+<h1 id="method-overloading-vs-method-overriding-in-java" style="text-decoration: underline;">1) Method Overloading vs Method Over recognizer</h1>
 
 ## Introduction
 
@@ -359,7 +418,7 @@ Both concepts are fundamental to writing flexible, reusable, and object-oriented
 
 ---
 
-<h1 style="text-decoration: underline;">2) What is a ClassLoader in Java?</h1>
+<h1 id="what-is-a-classloader-in-java" style="text-decoration: underline;">2) What is a ClassLoader in Java?</h1>
 
 ## Introduction
 
@@ -767,7 +826,7 @@ required class when the JVM needs it.
 ```
 
 
-<h1 style="text-decoration: underline;"> 3) What is inheritance in Java?</h1>
+<h1 id="what-is-inheritance-in-java" style="text-decoration: underline;"> 3) What is inheritance in Java?</h1>
 
 ## Introduction
 
@@ -1417,7 +1476,7 @@ A simple rule:
 > If one object "contains" another object, use Composition.
 
 
-<h1 style="text-decoration: underline;">4) Why can’t we override a static method?</h1>
+<h1 id="why-cant-we-override-a-static-method" style="text-decoration: underline;">4) Why can’t we override a static method?</h1>
 
 Static methods belong to the **class**, not to an **object (instance)**. Method overriding is a runtime polymorphism feature that depends on the actual object being created.
 
@@ -1489,7 +1548,7 @@ The static method in the child class **hides** the parent's static method rather
 
 ---
 
-<h1 style="text-decoration: underline;"> 5) What is Dynamic Method Dispatch?</h1>
+<h1 id="what-is-dynamic-method-dispatch" style="text-decoration: underline;"> 5) What is Dynamic Method Dispatch?</h1>
 
 **Dynamic Method Dispatch** is the mechanism by which a call to an **overridden method** is resolved at **runtime** rather than at compile time.
 
@@ -1582,7 +1641,7 @@ Although the reference type is `List`, the actual object is `ArrayList`. The JVM
 
 ---
 
-<h1 style="text-decoration: underline;">6) What is Java Classpath?</h1>
+<h1 id="what-is-java-classpath" style="text-decoration: underline;">6) What is Java Classpath?</h1>
 
 **Classpath** is a parameter used by the Java Virtual Machine (JVM) and Java compiler (`javac`) to locate and load **compiled `.class` files**, **JAR files**, and other resources required by a Java application.
 
@@ -1756,7 +1815,7 @@ However, Classpath is still widely used in most Java applications.
 
 ---
 
-<h1 style="text-decoration: underline;">7) What does the `volatile` keyword do?</h1>
+<h1 id="what-does-the-volatile-keyword-do" style="text-decoration: underline;">7) What does the `volatile` keyword do?</h1>
 
 The `volatile` keyword is used to indicate that a variable's value may be modified by multiple threads.
 
@@ -2015,7 +2074,7 @@ The reader thread is guaranteed to see the latest value of `flag`.
 
 ---
 
-<h1 style="text-decoration: underline;">8) When does `finally` not execute?<h1>
+<h1 id="when-does-finally-not-execute" style="text-decoration: underline;">8) When does `finally` not execute?</h1>
 
 The `finally` block is designed to execute regardless of whether an exception occurs or not. It is commonly used for resource cleanup such as closing files, database connections, and streams.
 
@@ -2229,7 +2288,7 @@ The `finally` return overrides the `try` return.
 
 ---
 
-<h1 style="text-decoration: underline;"> 9) StringBuffer vs StringBuilder</h1>
+<h1 id="stringbuffer-vs-stringbuilder" style="text-decoration: underline;"> 9) StringBuffer vs StringBuilder</h1>
 # StringBuffer vs StringBuilder in Java
 
 Both **StringBuffer** and **StringBuilder** are mutable classes used to create and modify strings without creating new objects repeatedly.
@@ -2470,7 +2529,7 @@ Because StringBuilder does not perform synchronization, it generally provides be
 
 ---
 
-<h1 style="text-decoration: underline;"> 10) Vector vs ArrayList </h1>
+<h1 id="vector-vs-arraylist" style="text-decoration: underline;"> 10) Vector vs ArrayList </h1>
 # Vector vs ArrayList in Java
 
 Both **Vector** and **ArrayList** are dynamic array implementations that store elements in insertion order and allow duplicate values.
@@ -2772,7 +2831,7 @@ Vector is not deprecated, but it is considered a **legacy collection** and is ra
 
 ---
 
-<h1 style="text-decoration: underline;"> 11) Why is String immutable?</h1>
+<h1 id="why-is-string-immutable" style="text-decoration: underline;"> 11) Why is String immutable?</h1>
 # Why is String Immutable in Java?
 
 A **String** in Java is immutable, which means once a String object is created, its value cannot be changed.
@@ -3064,7 +3123,7 @@ Java
 
 ---
 
-<h1 style="text-decoration: underline;"> 12) HashMap vs HashSet</h1>
+<h1 id="hashmap-vs-hashset" style="text-decoration: underline;"> 12) HashMap vs HashSet</h1>
 # HashMap vs HashSet in Java
 
 Both **HashMap** and **HashSet** are part of the Java Collections Framework and use a hash-based data structure internally for fast storage and retrieval.
@@ -3392,7 +3451,7 @@ Each element in a HashSet is stored as a key in an internal HashMap with a dummy
 **HashMap stores data as unique keys and associated values, whereas HashSet stores only unique elements and internally uses a HashMap to maintain uniqueness.**
 ---
 
-<h1 style="text-decoration: underline;"> 13) Producer–Consumer problem & benefits </h1>
+<h1 id="producer-consumer-problem-benefits" style="text-decoration: underline;"> 13) Producer–Consumer problem & benefits </h1>
 # Producer–Consumer Problem & Benefits in Java
 
 The **Producer–Consumer Problem** is a classic multithreading problem where:
@@ -3807,7 +3866,7 @@ because it provides built-in synchronization and is simpler than using `wait()` 
 
 ---
 
-<h1 style="text-decoration: underline;"> 14) How to create an immutable class?</h1>
+<h1 id="how-to-create-an-immutable-class" style="text-decoration: underline;"> 14) How to create an immutable class?</h1>
 # How to Create an Immutable Class in Java?
 
 An **immutable class** is a class whose objects cannot be modified after they are created.
@@ -4206,7 +4265,7 @@ You must also protect mutable fields using defensive copies.
 
 ---
 
-<h1 style="text-decoration: underline;"> 15) Fail-fast vs Fail-safe iterators </h1>
+<h1 id="fail-fast-vs-fail-safe-iterators" style="text-decoration: underline;"> 15) Fail-fast vs Fail-safe iterators </h1>
 # Fail-Fast vs Fail-Safe Iterators in Java
 
 When iterating over a collection, modifying the collection simultaneously can lead to unexpected behavior.
@@ -4575,7 +4634,7 @@ It tries to detect concurrent modifications but does not provide a guaranteed me
 
 ---
 
-<h1 style="text-decoration: underline;"> 16) What is an interface? Features?</h1>
+<h1 id="what-is-an-interface-features" style="text-decoration: underline;"> 16) What is an interface? Features?</h1>
 # What is an Interface in Java?
 
 An **Interface** is a blueprint of a class that defines a set of behaviors (methods) that implementing classes must provide.
@@ -5073,7 +5132,7 @@ private methods
 
 ---
 
-<h1 style="text-decoration: underline;"> 17) SOLID principles </h1>
+<h1 id="solid-principles" style="text-decoration: underline;"> 17) SOLID principles </h1>
 # SOLID Principles in Java
 
 **SOLID** is a set of five object-oriented design principles introduced by
@@ -5639,7 +5698,7 @@ Depend on Abstractions
 
 ---
 
-<h1 style="text-decoration: underline;"> 18) What is the difference between `==` and `equals()`?</h1>
+<h1 id="what-is-the-difference-between-and-equals" style="text-decoration: underline;"> 18) What is the difference between `==` and `equals()`?</h1>
 # What is the Difference Between `==` and `equals()` in Java?
 
 One of the most frequently asked Java interview questions is:
@@ -6069,7 +6128,7 @@ because two separate objects are created.
 
 ---
 
-<h1 style="text-decoration: underline;"> 19) What is the `instanceof` operator?</h1>
+<h1 id="what-is-the-instanceof-operator" style="text-decoration: underline;"> 19) What is the `instanceof` operator?</h1>
 # What is the `instanceof` Operator in Java?
 
 The `instanceof` operator is used to check whether an object is an instance of a particular class, subclass, or interface at runtime.
@@ -6526,7 +6585,7 @@ It performs a **runtime type check**.
 **The `instanceof` operator is used to determine at runtime whether an object is an instance of a specified class, subclass, or interface, returning `true` if the relationship exists and `false` otherwise.**
 ---
 
-<h1 style="text-decoration: underline;"> 20) `super` keyword use cases </h1>
+<h1 id="super-keyword-use-cases" style="text-decoration: underline;"> 20) `super` keyword use cases </h1>
 # `super` Keyword Use Cases in Java
 
 The `super` keyword is a reference variable used to refer to the **immediate parent class object**.
@@ -7062,7 +7121,7 @@ super.id;
 
 ---
 
-<h1 style="text-decoration: underline;"> 21) What is `finalize()`? Why discouraged? </h1>
+<h1 id="what-is-finalize-why-discouraged" style="text-decoration: underline;"> 21) What is `finalize()`? Why discouraged? </h1>
 # What is `finalize()` in Java? Why Is It Discouraged?
 
 The `finalize()` method is a special method defined in the `Object` class that was historically used to perform cleanup operations before an object was garbage collected.
@@ -7499,7 +7558,7 @@ Execution timing is completely controlled by the Garbage Collector.
 
 ---
 
-<h1 style="text-decoration: underline;"> 22) What are the main Collections Framework interfaces?</h1>
+<h1 id="what-are-the-main-collections-framework-interfaces" style="text-decoration: underline;"> 22) What are the main Collections Framework interfaces?</h1>
 # What Are the Main Collections Framework Interfaces in Java?
 
 The **Java Collections Framework (JCF)** is a set of interfaces and classes that provide ready-made data structures and algorithms for storing and manipulating groups of objects.
@@ -8054,7 +8113,7 @@ Map is part of the Collections Framework but does not extend the `Collection` in
 
 ---
 
-<h1 style="text-decoration: underline;"> 23) What is a Thread? How to Create a Thread in Java?</h1>
+<h1 id="what-is-a-thread-how-to-create-a-thread-in-java" style="text-decoration: underline;"> 23) What is a Thread? How to Create a Thread in Java?</h1>
 # What is a Thread? How to Create a Thread in Java?
 
 A **Thread** is the smallest unit of execution within a process.
@@ -8549,7 +8608,7 @@ java.lang.IllegalThreadStateException
 
 ---
 
-<h1 style="text-decoration: underline;"> 24) What is a Virtual Thread in Java? How to Create It? When to Use It?</h1>
+<h1 id="what-is-a-virtual-thread-in-java-how-to-create-it-when-to-use-it" style="text-decoration: underline;"> 24) What is a Virtual Thread in Java? How to Create It? When to Use It?</h1>
 # What is a Virtual Thread in Java? How to Create It? When to Use It?
 
 ## Introduction
@@ -9035,7 +9094,7 @@ Standard Feature: Java 21
 
 ---
 
-<h1 style="text-decoration: underline;"> 25) What is deadlock? How to avoid?</h1>
+<h1 id="what-is-deadlock-how-to-avoid" style="text-decoration: underline;"> 25) What is deadlock? How to avoid?</h1>
 # What is Deadlock in Java? How to Avoid It?
 
 ## What is Deadlock?
@@ -9598,7 +9657,7 @@ for every thread.
 
 ---
 
-<h1 style="text-decoration: underline;"> 26) What is synchronization? </h1>
+<h1 id="what-is-synchronization" style="text-decoration: underline;"> 26) What is synchronization? </h1>
 # What is Synchronization in Java?
 
 ## Definition
@@ -10192,7 +10251,7 @@ It improves correctness and thread safety, often at the cost of performance.
 
 ---
 
-<h1 style="text-decoration: underline;"> 27) Shallow Copy vs Deep Copy in Java</h1>
+<h1 id="shallow-copy-vs-deep-copy-in-java" style="text-decoration: underline;"> 27) Shallow Copy vs Deep Copy in Java</h1>
 
 One of the most frequently asked Java interview questions is:
 
@@ -10683,7 +10742,7 @@ e1.address.city becomes Mumbai.
 
 ---
 
-<h1 style="text-decoration: underline;"> 28) What Are Annotations in Java? How to Create a Custom Annotation?</h1>
+<h1 id="what-are-annotations-in-java-how-to-create-a-custom-annotation" style="text-decoration: underline;"> 28) What Are Annotations in Java? How to Create a Custom Annotation?</h1>
 
 ## What Are Annotations?
 
@@ -11387,7 +11446,7 @@ Invalid.
 **Annotations are metadata used to provide additional information to the compiler, JVM, or frameworks, and custom annotations can be created using the `@interface` keyword along with meta-annotations such as `@Target` and `@Retention`.**
 ---
 
-<h1 style="text-decoration: underline;"> 29) What is the Java Memory Model (JMM)?</h1>
+<h1 id="what-is-the-java-memory-model-jmm" style="text-decoration: underline;"> 29) What is the Java Memory Model (JMM)?</h1>
 
 ## Definition
 
@@ -12119,7 +12178,7 @@ Ordering
 
 ---
 
-<h1 style="text-decoration: underline;"> 30) What is Reflection in Java?</h1>
+<h1 id="what-is-reflection-in-java" style="text-decoration: underline;"> 30) What is Reflection in Java?</h1>
 
 ## Definition
 
@@ -12727,7 +12786,7 @@ java.lang.reflect
 
 ---
 
-<h1 style="text-decoration: underline;"> 31) What Does `join()` Do in Java?</h1>
+<h1 id="what-does-join-do-in-java" style="text-decoration: underline;"> 31) What Does `join()` Do in Java?</h1>
 
 ## Definition
 
@@ -13281,7 +13340,7 @@ It ensures the calling thread waits until the target thread completes.
 
 ---
 
-<h1 style="text-decoration: underline;"> 32) Benefits of Java Stream API</h1>
+<h1 id="benefits-of-java-stream-api" style="text-decoration: underline;"> 32) Benefits of Java Stream API</h1>
 
 ## What is Stream API?
 
@@ -13939,7 +13998,7 @@ Parallel Streams can improve performance.
 
 ---
 
-<h1 style="text-decoration: underline;"> 33) What is Try-With-Resources in Java? </h1>
+<h1 id="what-is-try-with-resources-in-java" style="text-decoration: underline;"> 33) What is Try-With-Resources in Java? </h1>
 
 ## Definition
 
@@ -14561,7 +14620,7 @@ try(reader) {
 
 ---
 
-<h1 style="text-decoration: underline;"> 34) Comparable vs Comparator in Java</h1>
+<h1 id="comparable-vs-comparator-in-java" style="text-decoration: underline;"> 34) Comparable vs Comparator in Java</h1>
 
 One of the most frequently asked Java interview questions is:
 
@@ -15124,7 +15183,7 @@ compare()
 
 ---
 
-<h1 style="text-decoration: underline;"> 35) What is a Marker Interface in Java?</h1>
+<h1 id="what-is-a-marker-interface-in-java" style="text-decoration: underline;"> 35) What is a Marker Interface in Java?</h1>
 
 ## Definition
 
@@ -15660,7 +15719,7 @@ Can Be Serialized
 **A Marker Interface is an empty interface that provides metadata about a class and signals the JVM or frameworks to apply special behavior, such as serialization (`Serializable`) or cloning (`Cloneable`).**
 ---
 
-<h1 style="text-decoration: underline;"> 36) What is `clone()` in Java?</h1>
+<h1 id="what-is-clone-in-java" style="text-decoration: underline;"> 36) What is `clone()` in Java?</h1>
 
 ## Definition
 
@@ -16240,7 +16299,7 @@ Copy constructors are usually preferred.
 
 ---
 
-<h1 style="text-decoration: underline;"> 37) What Are Default Methods in Interfaces?</h1>
+<h1 id="what-are-default-methods-in-interfaces" style="text-decoration: underline;"> 37) What Are Default Methods in Interfaces?</h1>
 
 ## Definition
 
@@ -16856,7 +16915,7 @@ The implementing class must override the method.
 
 ---
 
-<h1 style="text-decoration: underline;"> 38) What Are Checked vs Unchecked Exceptions in Java?</h1>
+<h1 id="what-are-checked-vs-unchecked-exceptions-in-java" style="text-decoration: underline;"> 38) What Are Checked vs Unchecked Exceptions in Java?</h1>
 
 ## Definition
 
@@ -17431,7 +17490,7 @@ Unchecked Exceptions
 
 ---
 
-<h1 style="text-decoration: underline;"> 39) Difference between `throw` and `throws` </h1>
+<h1 id="difference-between-throw-and-throws" style="text-decoration: underline;"> 39) Difference between `throw` and `throws` </h1>
 
 One of the most frequently asked Java interview questions is:
 
@@ -17969,7 +18028,7 @@ public void process()
 
 ---
 
-<h1 style="text-decoration: underline;"> 40) What is `Optional` in Java?</h1>
+<h1 id="what-is-optional-in-java" style="text-decoration: underline;"> 40) What is `Optional` in Java?</h1>
 
 ## Definition
 
@@ -18713,7 +18772,7 @@ NoSuchElementException
 
 ---
 
-<h1 style="text-decoration: underline;"> 41) What is a functional interface?</h1>
+<h1 id="what-is-a-functional-interface" style="text-decoration: underline;"> 41) What is a functional interface?</h1>
 
 ## Definition
 
@@ -19381,7 +19440,7 @@ compare()
 
 ---
 
-<h1 style="text-decoration: underline;"> 42) What Are Lambda Expressions in Java?</h1>
+<h1 id="what-are-lambda-expressions-in-java" style="text-decoration: underline;"> 42) What Are Lambda Expressions in Java?</h1>
 
 ## Definition
 
@@ -20091,7 +20150,7 @@ Enable Functional Programming
 
 ---
 
-<h1 style="text-decoration: underline;"> 43) When to Use Abstract Class and When to Use Interface in Java?</h1>
+<h1 id="when-to-use-abstract-class-and-when-to-use-interface-in-java" style="text-decoration: underline;"> 43) When to Use Abstract Class and When to Use Interface in Java?</h1>
 
 One of the most frequently asked Java interview questions is:
 
@@ -20742,7 +20801,7 @@ Abstract Class for Shared Implementation
 
 ---
 
-<h1 style="text-decoration: underline;"> 44) What is Serialization in Java?</h1>
+<h1 id="what-is-serialization-in-java" style="text-decoration: underline;"> 44) What is Serialization in Java?</h1>
 
 ## Definition
 
@@ -21381,7 +21440,7 @@ Deserialization
 
 ---
 
-<h1 style="text-decoration: underline;"> 45) Difference Between `HashMap` and `ConcurrentHashMap` in Java</h1>
+<h1 id="difference-between-hashmap-and-concurrenthashmap-in-java" style="text-decoration: underline;"> 45) Difference Between `HashMap` and `ConcurrentHashMap` in Java</h1>
 
 One of the most frequently asked Java concurrency interview questions is:
 
@@ -22021,7 +22080,7 @@ ConcurrentHashMap
 
 ---
 
-<h1 style="text-decoration: underline;"> 46) Difference Between `ArrayList` and `LinkedList` in Java</h1>
+<h1 id="difference-between-arraylist-and-linkedlist-in-java" style="text-decoration: underline;"> 46) Difference Between `ArrayList` and `LinkedList` in Java</h1>
 
 One of the most frequently asked Java Collection interview questions is:
 
@@ -22649,7 +22708,7 @@ Because read operations are usually more frequent than insertions and deletions.
 
 ---
 
-<h1 style="text-decoration: underline;"> 47) Difference Between `map()` and `flatMap()` in Java Streams</h1>
+<h1 id="difference-between-map-and-flatmap-in-java-streams" style="text-decoration: underline;"> 47) Difference Between `map()` and `flatMap()` in Java Streams</h1>
 
 One of the most frequently asked Java 8 Stream API interview questions is:
 
@@ -23322,7 +23381,7 @@ flatMap()
 
 ---
 
-<h1 style="text-decoration: underline;"> 48) What is a Race Condition in Java?</h1>
+<h1 id="what-is-a-race-condition-in-java" style="text-decoration: underline;"> 48) What is a Race Condition in Java?</h1>
 
 ## Definition
 
@@ -24020,7 +24079,7 @@ instead.
 
 ---
 
-<h1 style="text-decoration: underline;"> 49) What Are Atomic Classes in Java?</h1>
+<h1 id="what-are-atomic-classes-in-java" style="text-decoration: underline;"> 49) What Are Atomic Classes in Java?</h1>
 
 ## Definition
 
@@ -24795,7 +24854,7 @@ AtomicInteger
 **Atomic Classes are lock-free, thread-safe utility classes in `java.util.concurrent.atomic` that use CAS (Compare-And-Swap) operations to perform atomic updates on variables without using explicit synchronization.**
 ---
 
-<h1 style="text-decoration: underline;"> 50) JVM vs JRE vs JDK in Java</h1>
+<h1 id="jvm-vs-jre-vs-jdk-in-java" style="text-decoration: underline;"> 50) JVM vs JRE vs JDK in Java</h1>
 
 One of the most frequently asked Core Java interview questions is:
 
