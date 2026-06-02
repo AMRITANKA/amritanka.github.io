@@ -1417,30 +1417,815 @@ A simple rule:
 > If one object "contains" another object, use Composition.
 
 
-## 4) Why can’t we override a static method?
-Static methods belong to the **class**, not the object. Overriding is based on **runtime polymorphism**, but static method binding happens at **compile time**.
+<h1 style="text-decoration: underline;">4) Why can’t we override a static method?</h1>
 
-A same-signature static method in child class results in **method hiding**, not overriding.
+Static methods belong to the **class**, not to an **object (instance)**. Method overriding is a runtime polymorphism feature that depends on the actual object being created.
+
+Since static methods are resolved at **compile time** using the reference type, Java does not allow true overriding of static methods.
+
+## Example
+
+```java
+class Parent {
+    static void show() {
+        System.out.println("Parent Static Method");
+    }
+}
+
+class Child extends Parent {
+    static void show() {
+        System.out.println("Child Static Method");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Parent p = new Child();
+        p.show();
+    }
+}
+```
+
+### Output
+
+```text
+Parent Static Method
+```
+
+## Why?
+
+When the compiler sees:
+
+```java
+p.show();
+```
+
+it checks the type of `p`, which is `Parent`, and binds the method call at compile time.
+
+Equivalent to:
+
+```java
+Parent.show();
+```
+
+Therefore, the `Child` version is not called.
+
+## What Happens Instead?
+
+The static method in the child class **hides** the parent's static method rather than overriding it. This is called **Method Hiding**.
+
+## Key Interview Point
+
+| Static Method | Instance Method |
+|--------------|----------------|
+| Belongs to class | Belongs to object |
+| Resolved at compile time | Resolved at runtime |
+| Cannot be overridden | Can be overridden |
+| Supports method hiding | Supports runtime polymorphism |
+
+## One-Line Interview Answer
+
+**Static methods cannot be overridden because they belong to the class and are resolved at compile time, whereas overriding requires runtime polymorphism based on the actual object instance. Static methods are hidden, not overridden.**
 
 ---
 
-## 5) What is Dynamic Method Dispatch?
-It’s runtime selection of an **overridden** method implementation based on the **actual object**, not the reference type.
+<h1 style="text-decoration: underline;"> 5) What is Dynamic Method Dispatch?</h1>
+
+**Dynamic Method Dispatch** is the mechanism by which a call to an **overridden method** is resolved at **runtime** rather than at compile time.
+
+It enables **runtime polymorphism**, where a superclass reference variable can refer to a subclass object, and the method that gets executed is determined by the actual object type.
+
+## Example
+
+```java
+class Animal {
+    void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Animal animal = new Dog(); // Upcasting
+        animal.sound();
+    }
+}
+```
+
+### Output
+
+```text
+Dog barks
+```
+
+## How It Works
+
+In the statement:
+
+```java
+Animal animal = new Dog();
+```
+
+- The reference type is `Animal`.
+- The actual object type is `Dog`.
+
+When:
+
+```java
+animal.sound();
+```
+
+is executed, the JVM checks the actual object type (`Dog`) at runtime and invokes:
+
+```java
+Dog.sound();
+```
+
+This runtime decision-making process is called **Dynamic Method Dispatch**.
+
+## Key Points
+
+- Supports **Runtime Polymorphism**.
+- Applicable only to **overridden instance methods**.
+- Method call is resolved at **runtime**.
+- Based on the **actual object type**, not the reference type.
+- Static, private, and final methods do not participate in Dynamic Method Dispatch.
+
+## Real-World Example
+
+```java
+List<String> list = new ArrayList<>();
+list.add("Java");
+```
+
+Although the reference type is `List`, the actual object is `ArrayList`. The JVM invokes the implementation provided by `ArrayList` at runtime.
+
+## Dynamic Method Dispatch vs Static Binding
+
+| Dynamic Method Dispatch | Static Binding |
+|------------------------|----------------|
+| Runtime decision | Compile-time decision |
+| Uses overridden methods | Uses static, private, final methods |
+| Supports polymorphism | Does not support polymorphism |
+| Based on object type | Based on reference type |
+
+## One-Line Interview Answer
+
+**Dynamic Method Dispatch is the JVM mechanism that resolves calls to overridden methods at runtime based on the actual object type, enabling runtime polymorphism in Java.**
 
 ---
 
-## 6) What is Java Classpath?
-Classpath tells the JVM **where to find classes and libraries** (directories/JARs) required for execution.
+<h1 style="text-decoration: underline;">6) What is Java Classpath?</h1>
+
+**Classpath** is a parameter used by the Java Virtual Machine (JVM) and Java compiler (`javac`) to locate and load **compiled `.class` files**, **JAR files**, and other resources required by a Java application.
+
+In simple terms, the classpath tells Java **where to look for classes and libraries**.
+
+## Why is Classpath Needed?
+
+When a Java program uses a class, the JVM must know where that class is located.
+
+For example:
+
+```java
+import com.company.service.UserService;
+```
+
+The JVM searches the configured classpath to find:
+
+```text
+com/company/service/UserService.class
+```
+
+If the class is not found, Java throws:
+
+```text
+java.lang.ClassNotFoundException
+```
+
+or
+
+```text
+java.lang.NoClassDefFoundError
+```
+
+## Setting Classpath
+
+### Using Command Line
+
+#### Windows
+
+```bash
+java -cp .;lib/* Main
+```
+
+#### Linux/Mac
+
+```bash
+java -cp .:lib/* Main
+```
+
+Where:
+
+- `.` = Current directory
+- `lib/*` = All JAR files inside the `lib` folder
+
+## Example
+
+Project Structure:
+
+```text
+project/
+│
+├── Main.class
+└── lib/
+    └── mysql-connector.jar
+```
+
+Run the application:
+
+```bash
+java -cp .:lib/mysql-connector.jar Main
+```
+
+The JVM can now locate both:
+
+- `Main.class`
+- `mysql-connector.jar`
+
+## Ways to Configure Classpath
+
+### 1. Command Line
+
+```bash
+java -cp classes;lib/*
+```
+
+### 2. Environment Variable
+
+#### Windows
+
+```bash
+set CLASSPATH=.;C:\libs\*
+```
+
+#### Linux/Mac
+
+```bash
+export CLASSPATH=.:/libs/*
+```
+
+### 3. Manifest File in JAR
+
+```text
+Class-Path: lib/mysql.jar lib/log4j.jar
+```
+
+### 4. Build Tools
+
+Modern tools manage classpaths automatically:
+
+- Maven
+- Gradle
+- Spring Boot
+
+Example Maven dependency:
+
+```xml
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+</dependency>
+```
+
+## Classpath vs PATH
+
+| Classpath | PATH |
+|------------|------|
+| Used by JVM to find classes and JARs | Used by OS to find executables |
+| Java-specific | Operating System specific |
+| Contains `.class` and `.jar` locations | Contains executable locations |
+| Example: `lib/mysql.jar` | Example: `C:\Java\bin` |
+
+## Common Errors
+
+### ClassNotFoundException
+
+Occurs when JVM cannot find a class during runtime.
+
+```text
+java.lang.ClassNotFoundException
+```
+
+### NoClassDefFoundError
+
+Occurs when a class was available during compilation but is missing at runtime.
+
+```text
+java.lang.NoClassDefFoundError
+```
+
+## Java 9+ Module System
+
+Starting with Java 9, the **Module Path** was introduced as an alternative to the traditional Classpath for modular applications.
+
+```bash
+java --module-path mods
+```
+
+However, Classpath is still widely used in most Java applications.
+
+## Key Interview Points
+
+- Classpath specifies where Java should search for classes and JAR files.
+- Used by both `javac` and JVM.
+- Includes directories, JAR files, and resource files.
+- Incorrect classpath configuration leads to `ClassNotFoundException` and `NoClassDefFoundError`.
+- Build tools like Maven and Gradle manage classpaths automatically.
+
+## One-Line Interview Answer
+
+**Classpath is a JVM and compiler setting that specifies the locations of `.class` files, JAR files, and resources required for compiling and running a Java application.**
 
 ---
 
-## 7) What does the `volatile` keyword do?
-`volatile` ensures **visibility** of changes to a variable across threads (reads/writes go to main memory). It does **not** make compound operations (like `count++`) atomic.
+<h1 style="text-decoration: underline;">7) What does the `volatile` keyword do?</h1>
+
+The `volatile` keyword is used to indicate that a variable's value may be modified by multiple threads.
+
+It ensures that:
+
+1. **Visibility** – Changes made by one thread are immediately visible to all other threads.
+2. **Ordering** – Prevents certain instruction reordering by the JVM and CPU.
+
+However, `volatile` **does not provide atomicity**.
+
+## Why Do We Need `volatile`?
+
+In a multithreaded environment, each thread may keep a local copy of variables in its CPU cache.
+
+Without `volatile`:
+
+```text
+Thread A updates a variable
+        ↓
+Main Memory
+        ↓
+Thread B may still read an old cached value
+```
+
+With `volatile`:
+
+```text
+Thread A updates a variable
+        ↓
+Main Memory
+        ↓
+Thread B immediately sees the latest value
+```
+
+## Example
+
+### Without `volatile`
+
+```java
+class SharedData {
+    boolean running = true;
+}
+
+public class VolatileDemo {
+    public static void main(String[] args) {
+
+        SharedData data = new SharedData();
+
+        Thread t1 = new Thread(() -> {
+            while (data.running) {
+                // Busy waiting
+            }
+            System.out.println("Stopped");
+        });
+
+        Thread t2 = new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+            }
+            data.running = false;
+        });
+
+        t1.start();
+        t2.start();
+    }
+}
+```
+
+### Problem
+
+Thread `t1` may never see the updated value because it can keep reading a cached copy.
+
+### Solution
+
+```java
+class SharedData {
+    volatile boolean running = true;
+}
+```
+
+Now, when Thread `t2` updates `running`, Thread `t1` immediately sees the change.
+
+## What `volatile` Guarantees
+
+### 1. Visibility Guarantee
+
+```java
+volatile boolean flag;
+```
+
+If one thread writes:
+
+```java
+flag = true;
+```
+
+all other threads immediately see:
+
+```java
+flag == true
+```
+
+### 2. Happens-Before Relationship
+
+A write to a volatile variable happens-before every subsequent read of that variable.
+
+```java
+volatile boolean ready = false;
+```
+
+```java
+ready = true;   // Write
+```
+
+```java
+if (ready) {    // Read
+    // Guaranteed to see latest value
+}
+```
+
+### 3. Prevents Reordering
+
+The JVM and CPU cannot reorder memory operations around a volatile variable in a way that would break visibility guarantees.
+
+## What `volatile` Does NOT Guarantee
+
+### No Atomicity
+
+Consider:
+
+```java
+volatile int count = 0;
+
+count++;
+```
+
+The operation is actually:
+
+```java
+Read count
+Increment
+Write count
+```
+
+Multiple threads can interfere between these steps.
+
+Therefore:
+
+```java
+count++;
+```
+
+is **not thread-safe**, even if `count` is volatile.
+
+### Incorrect
+
+```java
+volatile int count = 0;
+
+public void increment() {
+    count++;
+}
+```
+
+### Correct
+
+```java
+AtomicInteger count = new AtomicInteger();
+
+count.incrementAndGet();
+```
+
+or
+
+```java
+synchronized void increment() {
+    count++;
+}
+```
+
+## `volatile` vs `synchronized`
+
+| volatile | synchronized |
+|-----------|-------------|
+| Provides visibility | Provides visibility + atomicity |
+| Lightweight | Heavier due to locking |
+| No thread blocking | Threads may block |
+| No mutual exclusion | Provides mutual exclusion |
+| Good for status flags | Good for critical sections |
+
+## Common Use Cases
+
+### 1. Shutdown Flag
+
+```java
+volatile boolean stop = false;
+```
+
+### 2. Configuration Refresh
+
+```java
+volatile String configValue;
+```
+
+### 3. Singleton with Double-Checked Locking
+
+```java
+private static volatile Singleton instance;
+```
+
+```java
+public static Singleton getInstance() {
+    if (instance == null) {
+        synchronized (Singleton.class) {
+            if (instance == null) {
+                instance = new Singleton();
+            }
+        }
+    }
+    return instance;
+}
+```
+
+## Memory Visibility Example
+
+```java
+class Example {
+    private volatile boolean flag = false;
+
+    public void writer() {
+        flag = true;
+    }
+
+    public void reader() {
+        if (flag) {
+            System.out.println("Updated");
+        }
+    }
+}
+```
+
+The reader thread is guaranteed to see the latest value of `flag`.
+
+## Key Interview Points
+
+- `volatile` ensures visibility of changes across threads.
+- Prevents instruction reordering around the variable.
+- Does not provide atomicity.
+- Suitable for flags, status indicators, and configuration values.
+- Cannot replace `synchronized` when multiple operations must execute atomically.
+
+## One-Line Interview Answer
+
+**The `volatile` keyword ensures that changes made to a variable by one thread are immediately visible to all other threads and prevents instruction reordering, but it does not provide atomicity or thread synchronization.**
 
 ---
 
-## 8) When does `finally` not execute?
-`finally` generally executes, except when the JVM exits abruptly, e.g. `System.exit(0)` (or a fatal crash).
+<h1 style="text-decoration: underline;">8) When does `finally` not execute?<h1>
+
+The `finally` block is designed to execute regardless of whether an exception occurs or not. It is commonly used for resource cleanup such as closing files, database connections, and streams.
+
+However, there are a few exceptional situations where the `finally` block may **not execute**.
+
+## Normal Behavior
+
+```java
+try {
+    System.out.println("Inside try");
+} finally {
+    System.out.println("Inside finally");
+}
+```
+
+### Output
+
+```text
+Inside try
+Inside finally
+```
+
+The `finally` block executes even if:
+
+- An exception occurs
+- A `return` statement is executed
+- A `break` or `continue` statement is used
+
+---
+
+## Case 1: `System.exit()` is Called
+
+If the JVM is explicitly terminated using `System.exit()`, the `finally` block will not execute.
+
+```java
+public class Test {
+    public static void main(String[] args) {
+        try {
+            System.out.println("Inside try");
+            System.exit(0);
+        } finally {
+            System.out.println("Inside finally");
+        }
+    }
+}
+```
+
+### Output
+
+```text
+Inside try
+```
+
+The JVM shuts down immediately.
+
+---
+
+## Case 2: JVM Crash or Forced Termination
+
+If the JVM crashes due to:
+
+- Native code failure
+- JVM internal error
+- Operating system crash
+- Forceful process termination (`kill -9` on Linux)
+
+the `finally` block may never execute.
+
+```text
+JVM Crash
+   ↓
+Program Ends Immediately
+   ↓
+finally Not Executed
+```
+
+---
+
+## Case 3: Power Failure / System Shutdown
+
+If the machine loses power or the operating system shuts down unexpectedly before reaching the `finally` block, it cannot execute.
+
+```text
+Power Failure
+   ↓
+Application Stops
+   ↓
+finally Skipped
+```
+
+---
+
+## Case 4: Infinite Loop Before Reaching `finally`
+
+If control never exits the `try` block, the `finally` block is never reached.
+
+```java
+try {
+    while (true) {
+        // Infinite loop
+    }
+} finally {
+    System.out.println("finally");
+}
+```
+
+### Output
+
+```text
+(No Output)
+```
+
+The loop never ends, so execution never reaches `finally`.
+
+---
+
+## `finally` Executes Even with `return`
+
+Many interviewers ask this question.
+
+```java
+public int test() {
+    try {
+        return 10;
+    } finally {
+        System.out.println("finally");
+    }
+}
+```
+
+### Output
+
+```text
+finally
+```
+
+The `finally` block executes before the method actually returns.
+
+---
+
+## `finally` Executes Even with Exception
+
+```java
+try {
+    int x = 10 / 0;
+} finally {
+    System.out.println("finally");
+}
+```
+
+### Output
+
+```text
+finally
+Exception in thread "main" java.lang.ArithmeticException
+```
+
+The exception is propagated only after the `finally` block completes.
+
+---
+
+## Common Interview Trick
+
+```java
+try {
+    return 10;
+} finally {
+    return 20;
+}
+```
+
+### Output
+
+```text
+20
+```
+
+The `finally` return overrides the `try` return.
+
+**Best Practice:** Avoid returning from a `finally` block.
+
+---
+
+## Summary Table
+
+| Scenario | Does `finally` Execute? |
+|-----------|------------------------|
+| Normal execution | ✅ Yes |
+| Exception occurs | ✅ Yes |
+| `return` statement | ✅ Yes |
+| `break` / `continue` | ✅ Yes |
+| `System.exit()` | ❌ No |
+| JVM crash | ❌ No |
+| Forceful process kill | ❌ No |
+| Power failure | ❌ No |
+| Infinite loop in `try` | ❌ No (never reached) |
+
+---
+
+## Key Interview Points
+
+- `finally` almost always executes.
+- Used for resource cleanup.
+- Executes even when exceptions occur or methods return.
+- Does **not** execute if the JVM terminates abruptly.
+- `System.exit()` is the most commonly cited interview answer.
+
+## One-Line Interview Answer
+
+**The `finally` block executes in almost all situations, except when the JVM terminates abruptly (e.g., `System.exit()`, JVM crash, forceful process termination, power failure) or when control never leaves the `try` block, such as an infinite loop.**
 
 ---
 
