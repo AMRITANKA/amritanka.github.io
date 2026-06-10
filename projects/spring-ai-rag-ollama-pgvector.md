@@ -20,24 +20,6 @@ When a question is asked, the app:
 
 ---
 
-## Table of Contents
-
-- [Features](#features)
-- [Architecture](#architecture)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Prerequisites](#prerequisites)
-- [Setup Instructions](#setup-instructions)
-- [Running the Application](#running-the-application)
-- [Usage](#usage)
-- [Configuration Reference](#configuration-reference)
-- [Testing](#testing)
-- [Troubleshooting](#troubleshooting)
-- [Key Dependencies](#key-dependencies)
-- [Roadmap](#roadmap--contributing)
-
----
-
 ## Features
 
 - **End-to-end RAG pipeline** with Spring AI's `ChatClient` and `QuestionAnswerAdvisor`.
